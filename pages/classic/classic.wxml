@@ -1,1 +1,2 @@
-<m-like />
+<m-like bind:like="onLike" like="{{m_classic.like_status}}" count="{{m_classic.fav_nums}}" />
+<m-movie img="{{m_classic.image}}" content="{{m_classic.content}}" />

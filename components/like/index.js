@@ -28,6 +28,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    //自定义事件
     onLike:function(event){
       let like = this.properties.like
       let count = this.properties.count
@@ -37,6 +38,11 @@ Component({
         count:count,
         like:!like
       })
+      //激活 事件
+      let behavior = this.properties.like?'like':'cancel'     //判断是点赞还是撤销
+      this.triggerEvent('like',{  
+        behavior:behavior
+      },{})   
     }
   }
 })

@@ -75,4 +75,56 @@
       })
   
 
-  # mz_test_v1
+==============
+= 2018/10/18 =
+============== 
+  一、同步、异步与回调函数
+      1.let data = wx.request({.....})  无法将获取到的数据给data，因为wx.request是异步的，异步函数的返回值需要用回调函数接收
+      2.回调函数
+        success:function(res){
+          console.log(res)    //在这里console.log(this.data.test)   this不可以使，因为作用域改变，他并没有指向任何page的object
+         }
+        需要改为：（箭头函数）
+        success:(res)=>{
+          console.log(this.data.test)
+        }
+  二、const （与let一样定义变量）
+      1.定义的是一个（不可改变的）常量
+      2.const config = {
+        api_base_url:'http://bl.7yue.pro/v1/',
+        appkey: "pe6lyAeHjpf7FrQf"
+      }
+      修改：config = 2  //报错    因为内存地址改变了
+           config.appkey = 1 //不报错   
+  三、import导入的时候路径只能是相对路径
+
+==============
+= 2018/10/19 =
+============== 
+  一、在classic.js中获得的数据给到index.js中
+      1.在index.js中只能修改properties（组件）中的属性，data中的不可以（私有的）
+
+  二、自定义组件中properties属性 关系
+      properties: {
+        like:{
+          type:Boolean,
+        },
+        count:{
+        type:Number
+        }
+      },
+     在使用是：<m-like like="{{}}" count="{{}}" />
+
+  三、赋值<m-like like="{{m_classic.like_status}}" count="{{m_classic.fav_nums}}" />
+
+      1.m_classic是与js中setData中自定义名字相对应
+  四、自定义事件
+    1.激活   事件
+      let behavior = this.properties.like?'like':'cancel'     //判断是点赞还是撤销
+      this.triggerEvent('like',{},{})     //激活自定义事件   第一个参数：事件名称   后两个为JavaScript对象  第二个参数可以自定义  第三个不可以
+      (第二个参数是设置detail属性的，可在调试中查看)
+  
+  8-7-完
+         
+
+
