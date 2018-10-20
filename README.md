@@ -119,12 +119,27 @@
 
       1.m_classic是与js中setData中自定义名字相对应
   四、自定义事件
-    1.激活   事件
-      let behavior = this.properties.like?'like':'cancel'     //判断是点赞还是撤销
-      this.triggerEvent('like',{},{})     //激活自定义事件   第一个参数：事件名称   后两个为JavaScript对象  第二个参数可以自定义  第三个不可以
-      (第二个参数是设置detail属性的，可在调试中查看)
+      1.激活   事件
+        let behavior = this.properties.like?'like':'cancel'     //判断是点赞还是撤销
+        this.triggerEvent('like',{},{})     //激活自定义事件   第一个参数：事件名称   后两个为JavaScript对象  第二个参数可以自定义  第三个不可以
+        (第二个参数是设置detail属性的，可在调试中查看)
   
-  8-7-完
-         
+==============
+= 2018/10/20 =
+============== 
+  一、数据初始化注意事项
+      （组件属性）properties: {index:Number}  和 data: {year:Number,month:String} 中的区别
+      1.在输出显示是index:0    year:f Number()  month:f String()     ps:f表示函数
+      2.不能再data中直接赋值 例如：year:Number,month:String  应该改为：year:0,month:''
+      3.properties 和 data中不要定义相同名称的变量，不然会产生覆盖现象，properties中的变量会覆盖data中的变量
+  二、observer:function(){}
+     1.observer函数当属性值发生改变时,小程序会调用observe函数
+     2.observer:function(newVal,oldVal,changedPath){
+       newVal:改变后的值
+       oldVal:改变前的值
+       changedPath:路径
+     }
+     3.重点：千万不要在observe中修改自身属性值，有可能引起无限递归
 
 
+第八章 结束

@@ -1,2 +1,5 @@
-<m-like bind:like="onLike" like="{{m_classic.like_status}}" count="{{m_classic.fav_nums}}" />
+<view class='header'>
+  <m-epsoide class="epsoide" index="{{m_classic.index}}"  />
+  <m-like class="like" bind:like="onLike" like="{{m_classic.like_status}}" count="{{m_classic.fav_nums}}" />
+</view>
 <m-movie img="{{m_classic.image}}" content="{{m_classic.content}}" />
