@@ -11,12 +11,15 @@ Page({
    */
   data: {
     m_classic:null,
+    latest:true,
+    firsr:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取最新一期的数据
      //classic.getLatest() 是异步函数 无法写成let latest = classic.getLatest()
     classicModel.getLatest((res)=>{
       console.log(res)
@@ -26,11 +29,25 @@ Page({
       })
     })  
   },
-
+  //点赞处理
   onLike:function(event){
     console.log(event)
     let behavior = event.detail.behavior
     likeModel.like(behavior,this.data.m_classic.id,this.data.m_classic.type)
+  },
+  //查看下一期
+  onNext:function(event){
+
+  },
+  //查看上一期
+  onPrevious:function(event){
+    let index = this.data.m_classic.index
+    classicModel.getPrevious(index, (res)=>{
+      // console.log(res)
+      this.setData({
+        m_classic: res
+      })
+    })
   },
 
 

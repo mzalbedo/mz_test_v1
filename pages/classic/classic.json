@@ -2,6 +2,7 @@
   "usingComponents":{
     "m-like":"/components/like/index",
     "m-movie":"/components/classic/movie/index",
-    "m-epsoide":"/components/epsoide/index"
+    "m-epsoide":"/components/epsoide/index",
+    "m-navi":"/components/navi/index"
   }
 }

@@ -1,0 +1,6 @@
+<view>
+  <image></image>
+  <image></image>
+  <image src='image/music@tag.png' />
+  <text></text>
+</view>
