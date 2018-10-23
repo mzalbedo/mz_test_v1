@@ -22,13 +22,15 @@ Page({
     //获取最新一期的数据
      //classic.getLatest() 是异步函数 无法写成let latest = classic.getLatest()
     classicModel.getLatest((res)=>{
-      console.log(res)
+      // console.log(res)
       //数据更新
       this.setData({
         m_classic:res
       })
+      // latestClassic LatestIndex (最新期刊)     ****     current  currenIndex
     })  
   },
+
   //点赞处理
   onLike:function(event){
     console.log(event)
@@ -37,19 +39,25 @@ Page({
   },
   //查看下一期
   onNext:function(event){
-
+    this._updateClassic('next')
   },
+
   //查看上一期
-  onPrevious:function(event){
+  onPrevious: function (event) {
+    this._updateClassic('previous')
+  },
+
+  //获取 上/下 一期的内容
+  _updateClassic: function (nextOrPrevious){
     let index = this.data.m_classic.index
-    classicModel.getPrevious(index, (res)=>{
-      // console.log(res)
+    classicModel.getClassic(index,nextOrPrevious, (res) => {
       this.setData({
-        m_classic: res
+        m_classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
       })
     })
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
