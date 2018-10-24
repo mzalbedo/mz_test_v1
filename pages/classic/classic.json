@@ -2,6 +2,8 @@
   "usingComponents":{
     "m-like":"/components/like/index",
     "m-movie":"/components/classic/movie/index",
+    "m-music": "/components/classic/music/index",
+    "m-essay": "/components/classic/essay/index",
     "m-epsoide":"/components/epsoide/index",
     "m-navi":"/components/navi/index"
   }

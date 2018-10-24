@@ -12,20 +12,29 @@ Page({
   data: {
     m_classic:null,
     latest:true,
-    firsr:false
+    firsr:false,
+    likeCount:0,
+    likeStatus:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //ES6模板字符串
+    // let a = 123
+    // console.log(`${a}456`)
+
     //获取最新一期的数据
      //classic.getLatest() 是异步函数 无法写成let latest = classic.getLatest()
     classicModel.getLatest((res)=>{
       // console.log(res)
       //数据更新
       this.setData({
-        m_classic:res
+        // ...res  //...是扩展运算符 （相当于把res展开了，在wxml网页调用时不用m_classic.属性）
+        m_classic:res,
+        likeCount:res.fav_nums,
+        likeStatus:res.like_status
       })
       // latestClassic LatestIndex (最新期刊)     ****     current  currenIndex
     })  
@@ -37,6 +46,7 @@ Page({
     let behavior = event.detail.behavior
     likeModel.like(behavior,this.data.m_classic.id,this.data.m_classic.type)
   },
+
   //查看下一期
   onNext:function(event){
     this._updateClassic('next')
@@ -51,6 +61,7 @@ Page({
   _updateClassic: function (nextOrPrevious){
     let index = this.data.m_classic.index
     classicModel.getClassic(index,nextOrPrevious, (res) => {
+      this._getLikeStatus(res.id,res.type)  //更新点赞
       this.setData({
         m_classic: res,
         latest: classicModel.isLatest(res.index),
@@ -58,6 +69,17 @@ Page({
       })
     })
   },
+  //更新点赞
+  _getLikeStatus:function(artID,category){
+    likeModel.getClassicLikeStatus(artID,category,
+      (res)=>{
+        this.setData({
+          likeCount: res.fav_nums,
+          likeStatus:res.like_status
+        })
+      })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

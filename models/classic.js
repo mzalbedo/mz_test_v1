@@ -24,7 +24,7 @@ class ClassicModel extends HTTP{
     //如果缓存中没有
     if(!classic){
       this.request({
-        url: 'classic/' + index + '/' + nextOrPrevious,
+        url: `classic/${index}/${nextOrPrevious}`,    //模板字符串
         success: (res) => {
           //将数据写入缓存
           wx.setStorageSync(this._getKey(res.index), res)

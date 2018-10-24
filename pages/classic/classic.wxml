@@ -1,8 +1,10 @@
 <view class='container'>
-<view class='header'>
-  <m-epsoide class="epsoide" index="{{m_classic.index}}"  />
-  <m-like class="like" bind:like="onLike" like="{{m_classic.like_status}}" count="{{m_classic.fav_nums}}" />
-</view>
-<m-movie img="{{m_classic.image}}" content="{{m_classic.content}}" />
-<m-navi bind:left="onNext" bind:right="onPrevious" class='navi' title="{{m_classic.title}}" first="{{first}}" latest="{{latest}}" />
+  <view class='header'>
+    <m-epsoide class="epsoide" index="{{m_classic.index}}" />
+    <m-like class="like" bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+  </view>
+  <m-movie hidden="{{m_classic.type!=100}}" img="{{m_classic.image}}" content="{{m_classic.content}}" />
+  <m-music wx:if="{{m_classic.type==200}}" img="{{m_classic.image}}" content="{{m_classic.content}}" src="{{m_classic.url}}" />
+  <m-essay hidden="{{m_classic.type!=300}}" img="{{m_classic.image}}" content="{{m_classic.content}}" />
+  <m-navi bind:left="onNext" bind:right="onPrevious" class='navi' title="{{m_classic.title}}" first="{{first}}" latest="{{latest}}" />
 </view>
