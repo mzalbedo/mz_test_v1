@@ -205,8 +205,42 @@ Mz_Dawn
 ==============
 = 2018/10/25 =
 ============== 
+  一、tabBar  
+    "selectedColor": "#000000",     //选中后的颜色
+    "backgroundColor": "#ffffff",   //底色
+    "color": "#c7c7c7",             //未选中的颜色
+  二、处理异步
+    1.callback 回调函数， （纯粹的callback会产生回调地狱   它剥夺了函数的return能力）
+    2.promise 多个异步等待合并  不需要层层传递callback
+    3.async 和 await   是ES2017中的   现在小程序不支持
+  三、Promise （是一个对象）
+    1.对象是可以保存状态的  函数是不行的（闭包函数是可以的）
+        // Promise 第一步 new一个Promise
+        // 异步代码 写在  Promise的函数中 第二步
+        const: promis = new Promise((resolve,reject)=>{
+          //Promise的三种状态
+          //pending  fulfilled   rejected   
+          //进行中    已成功       以失败             （在第一步new Promise时 状态为pending）
+          //状态的更改：  resolve是将pending改为fulfilled （已成功）
+                         reject是将pending改为rejected（以失败）
+          wx.getSystemInfo({
+            success:(res)=> {
+             resolve(res)       (当状态修改后Promise就会凝固，不会再改变状态)
+            },
+            fail:(Error)=>{
+              reject(error)
+            }
+          })
+        })
+        //第三部  获取
+         promise.then((res) => {  //成功
+            console.log(res)
+          }),
+          (error)=>{              //失败（顺序不能改变）
+            console.log(error)
+          }
 
-
+    11-4 完
 
 ==============
 = 2018/10/26 =

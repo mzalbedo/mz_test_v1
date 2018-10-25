@@ -22,7 +22,7 @@ Component({
     playSrc:'images/player@play.png'
   },
 
-  attached: function (event) {   //
+  attached(event) {   //
     this._recoverStatus()
     this._monitorSwitch()
   },

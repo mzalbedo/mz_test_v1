@@ -59,7 +59,7 @@ Page({
 
   //获取 上/下 一期的内容
   _updateClassic: function (nextOrPrevious){
-    let index = this.data.m_classic.index
+    const index = this.data.m_classic.index
     classicModel.getClassic(index,nextOrPrevious, (res) => {
       this._getLikeStatus(res.id,res.type)  //更新点赞
       this.setData({

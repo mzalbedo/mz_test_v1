@@ -33,7 +33,7 @@ Component({
     let month = date.getMonth() //month获取到的值 比真实月份少一 
     
     this.setData({
-      year:year,
+      year,
       month:this.data.months[month]
     })
   },
