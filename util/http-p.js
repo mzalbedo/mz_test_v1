@@ -3,19 +3,22 @@ import {config} from '../config.js'
 const tips = {
   1:'抱歉，出现了一个错误',
   1005:'aapkey无效，请前往官网申请',
-  3000:'期刊不存在'
+  3000:'期刊不存在',
 }
 
 class HTTP{
-  request(params){
-    if(!params.method){
-      params.method = "GET"
-    }
+  request({url, data = {}, method = 'GET'}){
+    return new Promise((resolve,reject)=>{
+      this._request(url, resolve, reject, data, method)
+    })
+  }
+  _request(url, resolve, reject, data = {}, method = 'GET') {  //这里resolve 和 reject不可以写在data和method这也赋默认值的后面（原则）
     // url,data,method
+
       wx.request({
-        url:config.api_base_url + params.url,
-        method:params.method,
-        data:params.data,
+        url:config.api_base_url + url,
+        method:method,
+        data:data,
         header:{
           'content-type':'application/json',
           'appkey':config.appkey
@@ -23,12 +26,13 @@ class HTTP{
         success:(res)=>{
           // startsWith
           // endsWith
-          let code = res.statusCode.toString()  //statusCode获取http的状态码
+          const code = res.statusCode.toString()  //statusCode获取http的状态码
           if(code.startsWith('2')){ //如果code是以2开头(成功)
-            params.success && params.success(res.data)    //将结果放入到调用的回调函数(改：加了params.success && 当success为空时不执行后面函数)
+            resolve(res.data)   
           }
           else{ //服务器异常
-            let error_code = res.data.error_code  //返回数据data中的错误码
+            reject()
+            const error_code = res.data.error_code  //返回数据data中的错误码
             this._show_error(error_code)
             // wx.showToast({
             //   title: '服务器异常',
@@ -38,22 +42,22 @@ class HTTP{
           }
         },
         fail:(err)=>{ //API调用失败
+          reject()
           this._show_error(1)
         }
       })
   }
 
   _show_error(error_code){
-    if (!error_code) {
+    if(!error_code){
       error_code = 1;
     }
     const tip = tips[error_code]
     wx.showToast({
-      title: tip ? tip : tips[1],
+      title: tip?tip:tips[1],
       icon: 'none',
       duration: 2000
     })
   }
-
 }
 export{HTTP}
