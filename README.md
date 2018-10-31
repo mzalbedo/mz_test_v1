@@ -248,5 +248,92 @@ Mz_Dawn
   一、用{}括起来就相当于一个对象  详情见models中的book.js 和 util中http-p.js中
 
   二、Promise的正确用法
+        //Promise的正确用法示例   book.js
+    // bookModel.getHotList()
+    //   .then(res => {
+    //     console.log(res)
+    //     return bookModel.getMyBookCount()
+    //   })
+    //   .then(res =>{
+    //     console.log(res)
+    //     return bookModel.getMyBookCount()
+    //   })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+//==================================================================================
+      //Promise的错误用法示例
+    // const hotList = bookModel.getHotList()
+    // hotList.then(
+    //   res =>{
+    //     console.log(res)
+    //     bookModel.getMyBookCount()
+    //     .then(res => {
+    //       console.log(res)
+    //       bookModel.getMyBookCount()
+    //       .then(res => {
+    //         console.log(res)
+    //       })
+    //     })
+    //   }
+    // )
+//==================================================================================
+    // // Promise 第一步 new一个Promise
+    // // 异步代码 写在  Promise的函数中 第二步
+    // const promise = new Promise((resolve, reject) => {
+    //   //Promise的三种状态
+    //   //pending  fulfilled   rejected
+    //   //进行中    已成功       以失败
+    //   wx.getSystemInfo({
+    //     success: res => resolve(res),
+    //     fail: Error => reject(error)
+    //   })
+    // })
+    // promise.then(
+    //   res => console.log(res),
+    //   error => console.log(error)
+    // )
     
     第十一章  结束
+
+==============
+= 2018/10/27 =
+============== 
+
+      休息 Mz_Dawn
+
+==============
+= 2018/10/28 =
+============== 
+
+     休息 Mz_Dawn
+
+==============
+= 2018/10/29 =
+============== 
+
+     休息 Mz_Dawn
+
+==============
+= 2018/10/30 =
+============== 
+
+     休息 Mz_Dawn
+
+==============
+= 2018/10/31 =
+============== 
+  一、wxml中循环（列表渲染）
+    <block wx:for="{{books}}">
+      <m-book book="{{item}}" />
+    </block>
+    block 不会显示  可以当做一个括号
+    wx:for-item=" " 可以对默认的item改名
+  二、页面接收参数
+      1.组件接收参数是用properties
+      2.页面接收用 (都在onLoad中的options中)
+        onLoad: function (options) {
+          const id = options.id
+        },
+
+  12-6 结束
