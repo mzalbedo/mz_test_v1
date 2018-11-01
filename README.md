@@ -337,3 +337,64 @@ Mz_Dawn
         },
 
   12-6 结束
+
+==============
+= 2018/11/01 =
+============== 
+  一、 slot   插槽  
+      1.当接收到 值 或 者标 签时会显示，否则不会显示
+      2.用法
+        首先在 Component 中加入
+        options:{
+          multipleSlots:true
+        }, 启用slot插槽
+
+        之后在wxml中写入  <slot name="after"></slot> 插槽语句
+
+        最后在其他页面中使用
+        <m-tag text="{{item.content}}">
+          <text slot="after">{{'+'+item.nums}}</text>   
+        </m-tag>
+
+  二、css子元素选择
+         .comment-container>v-tag:nth-child(1)>view {
+           background-color: #fffbdd;
+          }
+
+          .comment-container>v-tag:nth-child(2)>view {
+              background-color: #eefbff;
+          } 
+          样式修改   （ 霸道  hack ）
+        
+  三、外部样式的传递（tag组件中）
+        1.<!-- container普通样式、  tag-class外部样式  后面的样式不一定能成功覆盖前面的样式 -->
+        2.解决方法
+          .ex-tag1 {
+            background-color: #fffbdd !important;       //!important 将强重要性 这样可以覆盖普通样式
+          }
+      
+  第十二章  结束
+
+==============
+= 2018/11/02 =
+============== 
+
+
+==============
+= 2018/11/03 =
+============== 
+
+
+==============
+= 2018/11/04 =
+============== 
+
+
+==============
+= 2018/11/05 =
+============== 
+
+
+==============
+= 2018/11/06 =
+============== 
