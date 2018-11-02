@@ -3,10 +3,10 @@ var format = function(text){
         return
     }
     var reg = getRegExp('\\\\n','g')
-    return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+  return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') //将上面的\\n替换为\n，需要在wxml页面标签中加入decode='true'不然不会解析&nbsp
 }
 
-var limit = function(array, length){
+var limit = function(array, length){    //过滤器  限制短评数量
     return array.slice(0, length)
 }
 
