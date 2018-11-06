@@ -25,37 +25,49 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
-    wx.shouLoading()  //显示加载状态
-
+    wx.showLoading()  //加载loading
     const bid = options.bid
-    // console.log(bid)
     const detail = bookModel.getDetail(bid)
     const comments = bookModel.getComments(bid)
     const likeStatus = bookModel.getLikeStatus(bid)
-    // console.log(comments)
-    //从detail中把数据取出来，并存到data中
-    detail.then(res => {
+
+    // 行的Promise 合体   在全部运行完后再执行then回调，时间取决于最长的时间
+    //race 竞争   当任意一个完成后  就进行回调
+    Promise.all([detail,comments,likeStatus])
+    .then(res=>{
       // console.log(res)
       this.setData({
-        book: res
+        book:res[0],
+        comments:res[1].comments,
+        likeStatus:res[2].like_status,
+        likeCount:res[2].fav_nums
       })
+      wx.hideLoading()
     })
 
-    comments.then(res => {
-      // console.log(res)
-      this.setData({
-        comments: res.comments
-      })
-    })
 
-    likeStatus.then(res => {
-      // console.log(res)
-      this.setData({
-        likeStatus: res.like_status,
-        likeCount: res.fav_nums
-      })
-    })
+    // //从detail中把数据取出来，并存到data中
+    // detail.then(res => {
+    //   // console.log(res)
+    //   this.setData({
+    //     book: res
+    //   })
+    // })
+
+    // comments.then(res => {
+    //   // console.log(res)
+    //   this.setData({
+    //     comments: res.comments
+    //   })
+    // })
+
+    // likeStatus.then(res => {
+    //   // console.log(res)
+    //   this.setData({
+    //     likeStatus: res.like_status,
+    //     likeCount: res.fav_nums
+    //   })
+    // })
   },
 
   onLike: function(event) {
