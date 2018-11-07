@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "m-tag":"/components/tag/index",
+    "m-book": "/components/book/index"
+  }
 }

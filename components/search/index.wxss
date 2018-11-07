@@ -81,7 +81,7 @@
     align-items: center;
 }
 
-.books-container v-book {
+.books-container m-book {
     margin-bottom: 25rpx;
 }
 
@@ -131,7 +131,7 @@
     width: 630rpx;
 }
 
-.tags v-tag {
+.tags m-tag {
     margin-right: 20rpx;
     margin-bottom: 20rpx;
 }
