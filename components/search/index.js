@@ -14,7 +14,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    more:{
+      type:String,
+      observer: '_load_more'  //_load_more为自定义函数
+      // observer: 属性发生变化是触发
+    }
   },
 
   /**
@@ -25,7 +29,8 @@ Component({
     hotWords:[],
     dataArray:[],
     searching:false,
-    q:''
+    q:'',  //要搜索的数据
+    loading:false
   },
 
   attached(){ //组件初始化是调用的函数
@@ -46,6 +51,27 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    _load_more(){   //所搜数据触底时被调用
+      // console.log(123321)
+      if(!this.data.q){
+        return
+      }
+      if(this.data.loading){
+        return
+      }
+      const length = this.data.dataArray.length   //已经从服务器取了多少条数据
+      this.data.loading = true      //加锁  防止因为快速下拉获取重复数据
+      bookModel.search(length,this.data.q).then(res=>{
+        this.data.dataArray   //之前已经取到的数据
+        res.books    //新请求到的数据
+        const tempArray = this.data.dataArray.concat(res.books)  //合并
+        this.setData({
+          dataArray:tempArray,
+          loading:false   //解锁
+        })
+      })
+    },
+
     onCancel(event) {
       this.triggerEvent('cancel', {}, {})
     },
@@ -69,6 +95,8 @@ Component({
         })
         keywordModel.addToHistory(q)   //将搜索数据记录写入缓存
       })
-    }
+    },
+
+
   }
 })

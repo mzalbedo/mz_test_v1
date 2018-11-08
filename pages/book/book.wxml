@@ -15,4 +15,4 @@
   </view>
 </view>
 
-<m-search bind:cancel="cancel" wx:if="{{searching}}" />
+<m-search more="{{more}}" bind:cancel="cancel" wx:if="{{searching}}" />

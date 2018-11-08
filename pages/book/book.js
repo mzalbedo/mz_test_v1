@@ -2,6 +2,10 @@ import {
   BookModel
 } from '../../models/book.js'
 
+import {
+  random
+} from '../../util/common.js'
+
 const bookModel = new BookModel()
 
 Page({
@@ -11,7 +15,8 @@ Page({
    */
   data: {
     books: [],
-    searching:false
+    searching:false,
+    more:''
   },
 
   /**
@@ -38,6 +43,13 @@ Page({
     this.setData({
       searching: false
     })
+  },
+
+  onReachBottom() { //页面下拉到低端是触发
+    // console.log(123)
+    this.setData({
+      more:random(16) //生成16为随机数
+    })
   }
- 
+
 })
