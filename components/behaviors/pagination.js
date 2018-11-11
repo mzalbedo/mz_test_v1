@@ -2,7 +2,7 @@ const paginationBev = Behavior({
   data: { 
     dataArray: [],    //分页加载   管理一个页面显示的所有数据
     total: null,
-    noneResult: false,
+    noneResult: false,  //当为true是表示没有搜索到数据
     loading: false
   },
 
@@ -19,11 +19,11 @@ const paginationBev = Behavior({
       return this.data.dataArray.length
     },
 
-    setTotal(total) {     //
+    setTotal(total) {     
       this.data.total = total
       if (total == 0) {
         this.setData({
-          noneResult: true
+          noneResult: true   
         })
       }
     },
@@ -35,7 +35,7 @@ const paginationBev = Behavior({
         return true
       }
     },
-    initialize() {
+    initialize() {    //清空数组
       this.setData({
         dataArray: [],
         noneResult: false,
