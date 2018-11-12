@@ -59,18 +59,18 @@ Component({
       if (!this.data.q) {
         return
       }
-      if (this._isLocked()) {
+      if (this.isLocked()) {
         return
       }
       // const length = this.data.dataArray.length   //已经从服务器取了多少条数据
       if (this.hasMore()) { //判断是否还有数据没有加载
-        this._locked()    //加锁  防止因为快速下拉获取重复数据
+        this.locked()    //加锁  防止因为快速下拉获取重复数据
         bookModel.search(this.getCurrentStart(), this.data.q)
           .then(res => {
             this.setMoreData(res.books)
-            this._unLocked()  
+            this.unLocked()  
           },()=>{     //这里是then回调失败时执行的（第二个参数）如果不在这里解锁 在请求失败时会造成死锁现象
-            this._unLocked() 
+            this.unLocked() 
           })
       }
     },
@@ -125,21 +125,5 @@ Component({
         q:''
       })
     },
-
-    _isLocked() {  //判断是否加锁
-      return this.data.loading ? true : false
-    },
-
-    _locked(){
-      this.setData({  //这里必须用setData  否则无法生效   但涉及到数据绑定时必须用setData
-        loading:true
-      })
-    },
-
-    _unLocked() {
-      this.setData({
-        loading: false
-      })
-    }
   }
 })

@@ -452,9 +452,38 @@ Mz_Dawn
 ==============
 = 2018/11/12 =
 ============== 
+  一、获取用户信息  <不许要用户授权>  
+      这里只是利用微信提供的显示用户信息，并没有获取到信息（在js中无法获取到数据）
+    1.使用<open-data type="" />
+        groupName         拉取群名称         
+        userNickName      用户昵称          
+        userAvatarUrl     用户头像          
+        userGender        用户性别         
+        userCity          用户所在城市       
+        userProvince      用户所在省份      
+        userCountry       用户所在国家        
+        userLanguage      用户的语言       
 
+  二、获取用户信息  <授权获取>  
+    （老版本  wx.getUserInfo（）  现在不可以直接获取）
+    1.在wxml文件中写入
+      <button open-type='getUserInfo' bindgetuserinfo='getUserInfo'>授权</button>
+      现在如果想要弹出授权对话框，只能用<button>,其他标签无效
+    2.在js中写入
+      getUserInfo(event){
+        console.log(event)
+      }
+      （选择是否接受）
+    3.wx.getUserInfo({  //授权之后 他就可以获得信息
+      success:data=>{
+        console.log(data)
+      }
+    })
+  三、查看用户是否已经授权
+      wx.getSetting()
 
+  16-6  结束
 
 ==============
-= 2018/11/10 =
+= 2018/11/13 =
 ============== 
