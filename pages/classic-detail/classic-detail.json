@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "m-classic":"/pages/classic/classic"
+  }
+}

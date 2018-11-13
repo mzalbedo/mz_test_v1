@@ -473,7 +473,7 @@ Mz_Dawn
       getUserInfo(event){
         console.log(event)
       }
-      （选择是否接受）
+      （选择是否接受,如果接受就可以用这个函数会去到用户信息）
     3.wx.getUserInfo({  //授权之后 他就可以获得信息
       success:data=>{
         console.log(data)
@@ -487,3 +487,7 @@ Mz_Dawn
 ==============
 = 2018/11/13 =
 ============== 
+  一、完成我的收藏书籍的获取
+  
+  16-11 课程结束
+  ✿✿ヽ(°▽°)ノ✿

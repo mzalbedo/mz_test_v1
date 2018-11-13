@@ -32,7 +32,6 @@ class ClassicModel extends HTTP{
         }
       })
     }
-
     //如果缓存中存在数据
     else{
       sCallback(classic)
@@ -44,15 +43,35 @@ class ClassicModel extends HTTP{
   isFirst(index){
     return index == 1 ? true : false  
   }
+
   //判断是否是最新一期
   isLatest(index){
     let latestIndex = this._getLatestIndex()
     return latestIndex == index ? true : false
   }
+
+  //获取收藏记录
+  getMyFavor(success) {   
+    const params = {
+      url: 'classic/favor',
+      success: success
+    }
+    this.request(params)
+  }
+
+  getById(cid, type, success) {
+    let params = {
+      url: `classic/${type}/${cid}`,
+      success: success
+    }
+    this.request(params)
+  }
+
   //将最新的期刊号写入缓存
   _setLatestIndex(index){
     wx.setStorageSync('latest', index)  //缓存  第一个参数自定义   第二个是缓存数据 （同步写入缓存）
   }
+
   //读取缓存
   _getLatestIndex() {
     let index = wx.getStorageSync('latest')
